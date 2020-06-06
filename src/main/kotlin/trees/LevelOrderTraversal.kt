@@ -15,13 +15,12 @@ class LevelOrderTraversal {
         val list = mutableListOf(listOf(treeNode.`val`))
         var nodeList = listOf(treeNode)
         while (!nodeList.isNullOrEmpty()) {
-            val elemList = mutableListOf<TreeNode>()
+            val elemList = mutableListOf<TreeNode?>()
             nodeList.parallelStream().forEachOrdered { node ->
-                node.left.let {
-                    when {}
-                }elemList.add()
+                elemList.add(node.left)
+                elemList.add(node.right)
             }
-            nodeList = elemList
+            nodeList = elemList.filterNotNull()
             if (nodeList.isNotEmpty()) list.add(nodeList.map { it.`val` })
         }
         return list
